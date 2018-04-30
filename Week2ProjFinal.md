@@ -1,6 +1,6 @@
 ---
 title: "RepResWeek2PeerRevProjectF"
-date: '2018-04-18'
+date: '2018-04-30'
 output: 
   html_document:
     keep_md: true
@@ -31,12 +31,85 @@ df<-read.csv("activity.csv")
 
 #sum steps in a day and create a new table using lapply
 library(data.table)
+```
+
+```
+## Warning: package 'data.table' was built under R version 3.3.2
+```
+
+```r
 dtdf<-data.table(df)
 dailysteps<-dtdf[, lapply(.SD, sum, na.rm=TRUE), by = date,.SDcols = "steps"]
 
 #convert dailysteps$date to a numeric vector
 library(lubridate)
+```
+
+```
+## 
+## Attaching package: 'lubridate'
+```
+
+```
+## The following objects are masked from 'package:data.table':
+## 
+##     hour, isoweek, mday, minute, month, quarter, second, wday,
+##     week, yday, year
+```
+
+```
+## The following object is masked from 'package:base':
+## 
+##     date
+```
+
+```r
 library(dplyr)
+```
+
+```
+## -------------------------------------------------------------------------
+```
+
+```
+## data.table + dplyr code now lives in dtplyr.
+## Please library(dtplyr)!
+```
+
+```
+## -------------------------------------------------------------------------
+```
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:lubridate':
+## 
+##     intersect, setdiff, union
+```
+
+```
+## The following objects are masked from 'package:data.table':
+## 
+##     between, first, last
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 dailysteps<-mutate(dailysteps, date=ymd(date))
 
 #plot dates vs steps as histograms
@@ -83,7 +156,13 @@ df<-read.csv("activity.csv")
 library(data.table)
 dtdf<-data.table(df)
 library(ggplot2)
+```
 
+```
+## Warning: package 'ggplot2' was built under R version 3.3.2
+```
+
+```r
 #calculate mean steps for each interval and create a new table
 intervalmeans<-dtdf[, lapply(.SD, mean, na.rm=TRUE), 
                     by = interval,.SDcols = "steps"]
